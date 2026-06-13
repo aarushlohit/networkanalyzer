@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VulnSync Security Audit Report</title>
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#f3f4f6; color:#111827; }
+    .container { max-width:1400px; margin:0 auto; padding:24px; }
+    .header { background:linear-gradient(135deg,#1e293b,#334155); color:white; padding:32px; border-radius:16px; margin-bottom:24px; }
+    .header h1 { font-size:1.8em; margin-bottom:8px; }
+    .header p { color:#94a3b8; font-size:0.95em; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:24px; }
+    table { width:100%; border-collapse:collapse; background:white; border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.1); margin-bottom:24px; }
+    th { background:#f8fafc; padding:12px; text-align:left; font-weight:600; font-size:0.85em; color:#6b7280; text-transform:uppercase; letter-spacing:0.5px; border-bottom:2px solid #e5e7eb; }
+    tr:hover { background:#fafafa; }
+    h2 { font-size:1.3em; margin:24px 0 12px; color:#1e293b; }
+    .footer { text-align:center; color:#9ca3af; font-size:0.85em; padding:24px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🔍 VulnSync Security Audit Report</h1>
+        <p>Scan completed in 0.0s &nbsp;|&nbsp;  &nbsp;|&nbsp; v2.1.0</p>
+    </div>
+
+    <div class="grid">
+        
+    <div style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:4px solid #3b82f6">
+        <div style="font-size:0.85em;color:#6b7280;margin-bottom:8px">Hosts Scanned</div>
+        <div style="font-size:1.8em;font-weight:700;color:#111827">1</div>
+    </div>
+        
+    <div style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:4px solid #16a34a">
+        <div style="font-size:0.85em;color:#6b7280;margin-bottom:8px">Hosts Alive</div>
+        <div style="font-size:1.8em;font-weight:700;color:#111827">1</div>
+    </div>
+        
+    <div style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:4px solid #8b5cf6">
+        <div style="font-size:0.85em;color:#6b7280;margin-bottom:8px">Open Ports</div>
+        <div style="font-size:1.8em;font-weight:700;color:#111827">3</div>
+    </div>
+        
+    <div style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:4px solid #dc2626">
+        <div style="font-size:0.85em;color:#6b7280;margin-bottom:8px">Critical</div>
+        <div style="font-size:1.8em;font-weight:700;color:#111827">1</div>
+    </div>
+        
+    <div style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:4px solid #ea580c">
+        <div style="font-size:0.85em;color:#6b7280;margin-bottom:8px">High Risk</div>
+        <div style="font-size:1.8em;font-weight:700;color:#111827">2</div>
+    </div>
+        
+    <div style="background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,0.1);border-top:4px solid #ca8a04">
+        <div style="font-size:0.85em;color:#6b7280;margin-bottom:8px">Medium Risk</div>
+        <div style="font-size:1.8em;font-weight:700;color:#111827">0</div>
+    </div>
+    </div>
+
+    <h2>📋 Host Summary</h2>
+    <table>
+        <thead>
+            <tr><th>IP</th><th>Hostname</th><th>Status</th><th>Open Ports</th><th>OS Fingerprint</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-family:monospace">10.0.0.1</td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">server01</td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb"><span style="color:#16a34a;font-weight:600">● Alive</span></td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center;font-weight:600">3</td>
+            <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">Linux / Unix</td>
+        </tr></tbody>
+    </table>
+
+    <h2>🔌 Open Ports &amp; Services</h2>
+    <table>
+        <thead>
+            <tr><th>IP</th><th>Port</th><th>Protocol</th><th>Service</th><th>Version</th><th>Banner</th><th>Risk</th><th>CVEs</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-family:monospace">10.0.0.1</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center;font-weight:600">80</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">tcp</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">http</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">2.4.68</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">Apache/2.4.68</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center"><span style="background:#dc2626;color:white;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600">CRITICAL</span></td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-size:0.85em">—</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-family:monospace">10.0.0.1</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center;font-weight:600">22</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">tcp</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">ssh</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">8.0p1</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">OpenSSH_8.0</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center"><span style="background:#ea580c;color:white;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600">HIGH</span></td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-size:0.85em">—</td>
+            </tr>
+            <tr>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-family:monospace">10.0.0.1</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center;font-weight:600">443</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">tcp</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">https</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">1.1</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb">nginx/1.24.0</td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;text-align:center"><span style="background:#6b7280;color:white;padding:2px 8px;border-radius:4px;font-size:0.8em;font-weight:600">None</span></td>
+                <td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;font-size:0.85em">—</td>
+            </tr></tbody>
+    </table>
+
+    <div class="footer">
+        Generated by VulnSync v2.1.0 — Network Security Auditor<br>
+        Report generated at 
+    </div>
+</div>
+</body>
+</html>

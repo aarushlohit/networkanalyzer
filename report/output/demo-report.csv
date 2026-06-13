@@ -1,0 +1,4 @@
+IP,Hostname,Port,Protocol,State,Service,Version,Banner,CVSS Score,CVEs,OS Fingerprint,TLS Version,Cert Expired
+10.0.0.1,server01,80,tcp,open,http,2.4.68,Apache/2.4.68,9.8,,Linux / Unix,,
+10.0.0.1,server01,22,tcp,open,ssh,8.0p1,OpenSSH_8.0,8.1,,Linux / Unix,,
+10.0.0.1,server01,443,tcp,open,https,1.1,nginx/1.24.0,,,Linux / Unix,,
