@@ -1,17 +1,76 @@
-/.opencode
-/.pytest_cache
-/.venv
-*.pyc
+# ── Python ──────────────────────────────────────────────────────
 __pycache__/
-*.cpython-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
+*.cpython-*.pyc
 *.egg-info/
 dist/
 build/
 *.egg
-*.log
-*.coverage
-.coverage.*
-main.cpython-*.pyc
 *.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+*.coverage
+coverage.xml
+htmlcov/
+
+# ── Virtual Environments ────────────────────────────────────────
+.venv
+venv/
+env/
+.env
+virtualenv/
+
+# ── IDE / Editor ────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+/logs/
+
+# ── Tool Output ──────────────────────────────────────────────────
+.vulnsync/
+vulnsync.db
+vulnsync.db-wal
+vulnsync.db-shm
+reports/
+output/
+results/
+
+# ── Scanning Artifacts ───────────────────────────────────────────
+*_report.html
+*_report.pdf
+scan_results.*
+*.nmap
+*.gnmap
+*.xml
+
+# ── Daemon ───────────────────────────────────────────────────────
+*.pid
+vulnsync.pid
+
+# ── Docker ───────────────────────────────────────────────────────
+.docker/
+docker-compose.override.yml
+
+# ── CI / GitHub Actions ──────────────────────────────────────────
+.gk/
+
+# ── OS ───────────────────────────────────────────────────────────
+*.dmg
+*.pkg
+*.deb
+*.rpm
+
+# ── OpenCode ─────────────────────────────────────────────────────
+/.opencode
