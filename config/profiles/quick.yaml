@@ -1,0 +1,11 @@
+# VulnSync Profile: quick
+# Fast top-100 port scan — ideal for CI and pre-commit hooks
+description: "Fast top-100 port scan"
+ports: "top100"
+threads: 100
+timeout: 2.0
+service_detect: true
+os_detect: false
+web_fingerprint: false
+no_ping: false
+cve_check: true

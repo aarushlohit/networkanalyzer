@@ -1,3 +1,17 @@
 /.opencode
 /.pytest_cache
 /.venv
+*.pyc
+__pycache__/
+*.cpython-*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+*.log
+*.coverage
+.coverage.*
+main.cpython-*.pyc
+*.so

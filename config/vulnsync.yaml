@@ -1,0 +1,50 @@
+# VulnSync Configuration
+# Overrides defaults: project-level config over CLI args in CI/automation
+
+targets:
+  - "192.168.1.0/24"
+  - "10.0.0.1"
+
+ports: "22,80,443,8080,8443"
+profile: null
+threads: 50
+timeout: 3.0
+rate: 0
+jitter: 0
+scan_type: tcp
+service_detect: true
+os_detect: false
+web_fingerprint: false
+stealth: false
+no_ping: false
+cve_check: true
+
+output_dir: "./reports"
+output_formats: ["json", "html", "csv"]
+log_file: null
+log_level: "INFO"
+
+daemon:
+  enabled: false
+  interval_minutes: 60
+  targets: ["192.168.1.0/24"]
+  profile: quick
+  report_dir: "./reports"
+  max_reports: 100
+  notify_on_critical: true
+
+history:
+  enabled: true
+  db_path: "~/.vulnsync/history.db"
+  retention_days: 365
+  max_records: 10000
+
+notifiers:
+  slack_webhook: null
+  slack_channel: "#security-alerts"
+  slack_min_severity: "HIGH"
+  webhook_url: null
+  webhook_headers: {}
+  email_smtp: null
+  email_from: null
+  email_to: []

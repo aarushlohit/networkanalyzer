@@ -1,0 +1,13 @@
+# VulnSync Profile: stealth
+# Low-and-slow evasive scanning for production environments
+description: "Low-and-slow evasive scanning"
+ports: "top1000"
+threads: 10
+timeout: 10.0
+rate: 50
+jitter: 2000
+service_detect: true
+os_detect: false
+web_fingerprint: false
+no_ping: true
+cve_check: true

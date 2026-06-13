@@ -1,0 +1,11 @@
+# VulnSync Profile: full
+# Comprehensive 1-65535 port scan with full fingerprinting + OS detection
+description: "Full 1-65535 port scan with all fingerprinting"
+ports: "1-65535"
+threads: 200
+timeout: 3.0
+service_detect: true
+os_detect: true
+web_fingerprint: true
+no_ping: false
+cve_check: true

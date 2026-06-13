@@ -1,0 +1,29 @@
+services:
+  vulnsync:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: vulnsync:latest
+    container_name: vulnsync-scanner
+    network_mode: host
+    volumes:
+      - ./reports:/home/vulnsync/reports
+      - ./config/vulnsync.yaml:/home/vulnsync/vulnsync.yaml:ro
+    command: ["scan", "--config", "/home/vulnsync/vulnsync.yaml", "-oJ", "/home/vulnsync/reports/scan.json", "-oH", "/home/vulnsync/reports/scan.html"]
+
+  vulnsync-daemon:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: vulnsync:latest
+    container_name: vulnsync-daemon
+    network_mode: host
+    volumes:
+      - ./reports:/home/vulnsync/reports
+      - ./config/vulnsync.yaml:/home/vulnsync/vulnsync.yaml:ro
+      - vulnsync-data:/home/vulnsync/.vulnsync
+    command: ["daemon", "start", "--config", "/home/vulnsync/vulnsync.yaml"]
+    restart: unless-stopped
+
+volumes:
+  vulnsync-data:

@@ -1,0 +1,82 @@
+name: VulnSync Security Scan
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'config/**'
+      - '*.yaml'
+      - '*.yml'
+      - '*.json'
+  pull_request:
+    branches: [main, master]
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      targets:
+        description: 'Targets to scan (space-separated)'
+        required: false
+        default: ''
+      profile:
+        description: 'Scan profile (quick/full/web/stealth)'
+        required: false
+        default: 'quick'
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install VulnSync
+        run: |
+          pip install --upgrade pip
+          pip install -e .
+
+      - name: Scan targets
+        id: scan
+        run: |
+          TARGETS="${{ github.event.inputs.targets }}"
+          PROFILE="${{ github.event.inputs.profile }}"
+          if [ -z "$TARGETS" ]; then
+            if [ -f "config/vulnsync.yaml" ]; then
+              vulnsync scan --config config/vulnsync.yaml \
+                -oJ scan-results.json -oH scan-results.html --no-cve
+            else
+              echo "No targets specified and no config found" > scan-results.json
+            fi
+          else
+            vulnsync scan $TARGETS --profile "$PROFILE" \
+              -oJ scan-results.json -oH scan-results.html
+          fi
+
+      - name: Upload scan report
+        uses: actions/upload-artifact@v4
+        with:
+          name: vulnsync-report
+          path: |
+            scan-results.json
+            scan-results.html
+          retention-days: 30
+
+      - name: Post Slack alert
+        if: failure() && github.event_name == 'schedule'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            pip install -q requests
+            python -c "
+import json, requests
+summary = 'VulnSync scan failed on ${{ github.repository }}'
+requests.post('$SLACK_WEBHOOK', json={'text': summary})
+"
+          fi

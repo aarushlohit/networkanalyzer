@@ -1,0 +1,11 @@
+# VulnSync Profile: web
+# Web-focused scan for HTTP/HTTPS services with technology detection
+description: "Web-focused: HTTP/HTTPS ports + tech detection"
+ports: "80,443,8080,8443,3000,5000,9090"
+threads: 50
+timeout: 5.0
+service_detect: true
+os_detect: false
+web_fingerprint: true
+no_ping: true
+cve_check: true

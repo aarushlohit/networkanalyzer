@@ -1,0 +1,75 @@
+name: VulnSync Weekly Infrastructure Scan
+on:
+  schedule:
+    - cron: '0 4 * * 1'  # Mondays 04:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  weekly-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install VulnSync
+        run: |
+          pip install --upgrade pip
+          pip install -e .
+
+      - name: Create config
+        run: |
+          mkdir -p config
+          cat > config/vulnsync.yaml << 'EOF'
+          targets:
+            - ${{ vars.SCAN_TARGETS || '127.0.0.1' }}
+          ports: "22,80,443,8080,8443"
+          threads: 50
+          service_detect: true
+          cve_check: true
+          output_formats: ["json", "html"]
+          EOF
+
+      - name: Run scan with history
+        id: scan
+        continue-on-error: true
+        run: |
+          vulnsync scan --config config/vulnsync.yaml \
+            -oJ weekly-scan.json -oH weekly-scan.html \
+            --history-save
+
+      - name: Compare with previous scan
+        id: diff
+        continue-on-error: true
+        run: |
+          vulnsync history diff --last \
+            >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-scan-report
+          path: |
+            weekly-scan.json
+            weekly-scan.html
+          retention-days: 90
+
+      - name: Create issue on risk increase
+        if: steps.diff.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const diffPath = fs.existsSync('weekly-scan.diff.md');
+            const body = diffPath
+              ? fs.readFileSync('weekly-scan.diff.md', 'utf8')
+              : 'Scan detected changes requiring review. Report uploaded as artifact.';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Weekly Scan: Infrastructure drift detected',
+              body: body,
+              labels: ['security', 'automated-scan'],
+            });
